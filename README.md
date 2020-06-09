@@ -94,8 +94,6 @@
 	    }]
     }]
 
-
-    ArrayTree::getTree($array,$id);  //$array 包含树结构关系的数组（需包含 id  parent_id name），$id 父id ，会返回该父id下的所有子级元素（层级结构）
     
 获取包含层级结构的数组，并添加名称路径
 
