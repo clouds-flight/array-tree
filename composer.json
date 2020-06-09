@@ -1,0 +1,26 @@
+{
+    "name": "clouds-flight/array-tree",
+    "description": "library for change array with tree structure to tree structure",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "吴云祥",
+            "email": "1730848300@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ArrayTree\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    },
+    "require": {
+
+    }
+   
+}
