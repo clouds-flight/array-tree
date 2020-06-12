@@ -3,7 +3,7 @@
 /*
  * @Author: 吴云祥
  * @Date: 2020-06-09 11:57:21
- * @LastEditTime: 2020-06-09 18:38:22
+ * @LastEditTime: 2020-06-12 23:09:59
  * @FilePath: /array-tree/src/ArrayTree.php
  */
 
@@ -27,7 +27,8 @@ class ArrayTree
 
         $next = &$items[$id];
 
-        while (true) {
+        while (count($next) > 0) {
+
             $next_temp = array();
 
             foreach ($next as $key => $value) {
@@ -41,16 +42,11 @@ class ArrayTree
                 $next[$key]["children"] = $items[$value["id"]];
 
                 $next_temp = array_merge($next_temp, $items[$value["id"]]);
-
             }
 
             $next = &$next_temp;
 
             unset($next_temp);
-
-            if (count($next) == 0) {
-                break;
-            }
         }
 
         return $items[$id];
@@ -58,7 +54,7 @@ class ArrayTree
 
 
 
-    public static function getTreePath($array, $id,$separator)
+    public static function getTreePath($array, $id, $separator)
     {
         $items = [];
 
@@ -70,16 +66,16 @@ class ArrayTree
 
         $next = &$items[$id];
 
-        while (true) {
+        while (count($next) > 0) {
+
             $next_temp = array();
 
             foreach ($next as $key => $value) {
 
-                if(isset($value['path']))
-                {
-                    $next[$key]['path']=$next[$key]['path'].$separator.$value['name'];
-                }else{
-                    $next[$key]['path']=$value['name'];
+                if (isset($value['path'])) {
+                    $next[$key]['path'] = $next[$key]['path'] . $separator . $value['name'];
+                } else {
+                    $next[$key]['path'] = $value['name'];
                 }
 
                 $next[$key]["children"] = array();
@@ -90,21 +86,16 @@ class ArrayTree
 
                 $next[$key]["children"] = $items[$value["id"]];
 
-                foreach($items[$value["id"]] as $k=>$v)
-                {
-                    $items[$value["id"]][$k]['path']=$next[$key]['path'];
-                    $next_temp[]=&$items[$value["id"]][$k];
+                foreach ($items[$value["id"]] as $k => $v) {
+                    $items[$value["id"]][$k]['path'] = $next[$key]['path'];
+                    $next_temp[] = &$items[$value["id"]][$k];
                 }
-
             }
 
             $next = &$next_temp;
 
             unset($next_temp);
 
-            if (count($next) == 0) {
-                break;
-            }
         }
 
         return $items[$id];
@@ -124,9 +115,9 @@ class ArrayTree
 
         $next = &$items[$id];
 
-        $children=array();
+        $children = array();
 
-        while (true) {
+        while (count($next) > 0) {
             $next_temp = array();
 
             $children  = array_merge($children, array_column($next, 'id'));
@@ -142,19 +133,14 @@ class ArrayTree
                 $next[$key]["children"] = $items[$value["id"]];
 
                 $next_temp = array_merge($next_temp, $items[$value["id"]]);
-                
             }
 
             $next = &$next_temp;
 
             unset($next_temp);
-
-            if (count($next) == 0) {
-                break;
-            }
+            
         }
 
         return $children;
     }
-
 }
