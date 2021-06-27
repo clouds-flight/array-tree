@@ -24,9 +24,14 @@ class ArrayTree
                 $items[$v['parent_id']][] = &$array[$k];
             }
         }
+        
+        if(empty($items[$id]))
+        {
+            return [];   
+        }
 
         $next = &$items[$id];
-
+        
         while (count($next) > 0) {
 
             $next_temp = array();
@@ -62,6 +67,11 @@ class ArrayTree
             foreach ($array as $k => $v) {
                 $items[$v['parent_id']][] = &$array[$k];
             }
+        }
+        
+        if(empty($items[$id]))
+        {
+            return [];   
         }
 
         $next = &$items[$id];
@@ -111,6 +121,11 @@ class ArrayTree
             foreach ($array as $k => $v) {
                 $items[$v['parent_id']][] = &$array[$k];
             }
+        }
+        
+        if(empty($items[$id]))
+        {
+            return [];   
         }
 
         $next = &$items[$id];
